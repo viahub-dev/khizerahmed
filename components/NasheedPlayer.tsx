@@ -32,7 +32,7 @@ export default function NasheedPlayer() {
   return (
     <>
       <audio ref={audioRef} loop preload="none" onPause={() => setPlaying(false)}>
-        <source src="/audio/nasheed.mp3" type="audio/mpeg" />
+        <source src="/audio/my-dream.mp3" type="audio/mpeg" />
       </audio>
       <button
         onClick={toggle}
