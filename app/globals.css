@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-ink/10 dark:border-white/10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg dark:bg-bg-dark text-ink dark:text-ink-dark font-body antialiased transition-colors duration-300;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  /* Heading hierarchy — light mode only. Dark mode headings keep inheriting
+     the standard dark ink color, untouched. */
+  html:not(.dark) h1,
+  html:not(.dark) h2 {
+    color: #7d1128;
+  }
+  html:not(.dark) h3 {
+    color: #a63a50;
+  }
+
+  ::selection {
+    @apply bg-accent/15 dark:bg-accent-dark/20;
+  }
+
+  :focus-visible {
+    outline: 2px solid #7d1128;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .dark :focus-visible {
+    outline-color: #22d3ee;
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto max-w-content px-6 sm:px-8;
+  }
+
+  .section-label {
+    @apply flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent dark:text-accent-dark mb-4;
+  }
+
+  .section-label::before {
+    content: "";
+    @apply block h-px w-8 bg-accent dark:bg-accent-dark;
+  }
+
+  .section-label-walnut {
+    @apply flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-walnut dark:text-accent-dark mb-4;
+  }
+
+  .section-label-walnut::before {
+    content: "";
+    @apply block h-px w-8 bg-walnut dark:bg-accent-dark;
+  }
+
+  .card-surface {
+    background: #faf3e8;
+    border: 1px solid #e7d7c9;
+    border-radius: 1rem;
+  }
+
+  .dark .card-surface {
+    background: #1a2333;
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-accent dark:bg-accent-dark px-6 py-3 text-sm font-semibold text-white dark:text-bg-dark transition-all duration-200 hover:bg-accent-hover dark:hover:bg-accent-darkHover hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/20;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-full border border-walnut/60 dark:border-white/15 px-6 py-3 text-sm font-semibold text-walnut dark:text-ink-dark transition-all duration-200 hover:bg-walnut/10 dark:hover:border-accent-dark dark:hover:text-accent-dark;
+  }
+
+  .btn-outline-walnut {
+    @apply inline-flex items-center gap-2 rounded-full border border-walnut/40 dark:border-accent-dark/40 px-6 py-3 text-sm font-semibold text-walnut dark:text-accent-dark transition-all duration-200 hover:bg-walnut/5 dark:hover:bg-accent-dark/10;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid #e7d7c9;
+    background: rgba(139, 107, 74, 0.08);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #5e524b;
+  }
+
+  .dark .chip {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+  }
+
+  .chip-walnut {
+    background: rgba(139, 107, 74, 0.1);
+    border-color: rgba(139, 107, 74, 0.3);
+    color: #8b6b4a;
+  }
+
+  .dark .chip-walnut {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+  }
+}
+
+/* Sonar signature: a slow expanding ping used for the "available" status dot */
+.sonar-dot {
+  position: relative;
+}
+
+.sonar-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  opacity: 0;
+  animation: sonar-ping 2.8s ease-out infinite;
+}
+
+@keyframes sonar-ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Scroll-triggered heading reveal: drop in with a light wiggle settle */
+.reveal-heading {
+  opacity: 0;
+  transform: translateY(-18px) rotate(-2deg);
+}
+
+.reveal-heading.in-view {
+  animation: drop-wiggle 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes drop-wiggle {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px) rotate(-2deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(2px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(-1px) rotate(-0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-heading {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Circuit-grid backdrop for hero */
+.grid-backdrop {
+  background-image: linear-gradient(to right, rgba(125, 17, 40, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(125, 17, 40, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 30%, black 40%, transparent 80%);
+}
+
+.dark .grid-backdrop {
+  background-image: linear-gradient(to right, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.08) 1px, transparent 1px);
+}
