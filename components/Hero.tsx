@@ -19,14 +19,17 @@ export default function Hero() {
 
         <div className="flex items-center gap-5 mb-8">
           <div className="relative shrink-0">
-            <Image
-              src="/images/khizer.jpeg"
-              alt="Khizer Ahmed"
-              width={64}
-              height={64}
-            className="h-16 w-16 rounded-full object-cover border border-accent/30 dark:border-accent-dark/30"
+          <div className="h-32 w-28 overflow-hidden rounded-2xl border border-accent/30 dark:border-accent-dark/30">
+           <Image
+             src="/images/khizer.jpeg"
+             alt="Khizer Ahmed" 
+             width={280}
+             height={360}
+             quality={100}
+             className="h-full w-full object-cover object-[center_15%] scale-150"
            />
-            {/* This pencil badge is a placeholder for a future owner-only "change photo"
+         </div>
+                  {/* This pencil badge is a placeholder for a future owner-only "change photo"
                 action once the private admin area exists. It is not functional yet and
                 should not be visible to public visitors in that future version. */}
             <span className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full bg-accent dark:bg-accent-dark text-white dark:text-bg-dark flex items-center justify-center border-2 border-bg dark:border-bg-dark">
