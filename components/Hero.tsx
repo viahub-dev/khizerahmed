@@ -1,4 +1,5 @@
 import { site } from "@/lib/data";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -18,9 +19,13 @@ export default function Hero() {
 
         <div className="flex items-center gap-5 mb-8">
           <div className="relative shrink-0">
-            <div className="h-16 w-16 rounded-full bg-accent/10 dark:bg-accent-dark/10 border border-accent/30 dark:border-accent-dark/30 flex items-center justify-center font-display text-lg font-semibold text-accent dark:text-accent-dark">
-              KK
-            </div>
+            <Image
+              src="/images/khizer.jpeg"
+              alt="Khizer Ahmed"
+              width={64}
+              height={64}
+            className="h-16 w-16 rounded-full object-cover border border-accent/30 dark:border-accent-dark/30"
+           />
             {/* This pencil badge is a placeholder for a future owner-only "change photo"
                 action once the private admin area exists. It is not functional yet and
                 should not be visible to public visitors in that future version. */}
